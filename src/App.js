@@ -1,12 +1,15 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Banner from "./components/Banner/Banner";
-import Navbar from "./components/Navbar/Navbar";
+import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
     <>
-      <Navbar></Navbar>
-      <Banner></Banner>
+      <Header></Header>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+      </Routes>
     </>
   );
 }
