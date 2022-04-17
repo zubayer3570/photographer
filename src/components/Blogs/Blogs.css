@@ -1,0 +1,11 @@
+.ans-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    padding: 20px 10px;
+    text-align: center;
+}
+.grid-cell{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+}
