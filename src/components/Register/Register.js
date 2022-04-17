@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
@@ -7,8 +7,9 @@ import googleSignInBtn from "../../images/icon/btn_google_signin_dark_pressed_we
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [agreed, setAgreed] = useState(false);
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -19,6 +20,10 @@ const Register = () => {
     <div className="form-container">
       <Form className="form" onSubmit={handleSubmit}>
         <h2 className="text-center">Please Register</h2>
+        <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label>Your Name</Form.Label>
+          <Form.Control name="name" type="text" placeholder="Enter Your Name" />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control name="email" type="email" placeholder="Enter email" />
@@ -33,10 +38,14 @@ const Register = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
+          <Form.Check
+            onClick={() => setAgreed(!agreed)}
+            type="checkbox"
+            label="Accepts terms and conditions"
+          />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
+        <Button disabled={!agreed} variant="primary" type="submit">
+          Register
         </Button>
       </Form>
       <img src={googleSignInBtn} alt="" />
