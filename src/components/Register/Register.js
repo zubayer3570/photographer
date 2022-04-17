@@ -1,25 +1,24 @@
+import { Button } from "react-bootstrap";
 import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Form, Button } from "react-bootstrap";
-import googleSignInBtn from "../../images/icon/btn_google_signin_dark_pressed_web.png";
-import "./Login.css";
+import { Form } from "react-bootstrap";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import googleSignInBtn from "../../images/icon/btn_google_signin_dark_pressed_web.png";
 import { Link } from "react-router-dom";
 
-const Login = () => {
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-  console.log(user);
+const Register = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    signInWithEmailAndPassword(email, password);
+    createUserWithEmailAndPassword(email, password);
   };
   return (
     <div className="form-container">
       <Form className="form" onSubmit={handleSubmit}>
-        <h2 className="text-center">Please Login</h2>
+        <h2 className="text-center">Please Register</h2>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control name="email" type="email" placeholder="Enter email" />
@@ -41,14 +40,11 @@ const Login = () => {
         </Button>
       </Form>
       <img src={googleSignInBtn} alt="" />
-      <Link
-        style={{ textDecoration: "none", display: "inline" }}
-        to="/register"
-      >
-        Register Now!
+      <Link style={{ textDecoration: "none", display: "inline" }} to="/login">
+        Already have an Account?
       </Link>
     </div>
   );
 };
 
-export default Login;
+export default Register;
