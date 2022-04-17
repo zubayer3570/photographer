@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  console.log(user);
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;

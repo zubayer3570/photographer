@@ -1,20 +1,28 @@
 import { Button } from "react-bootstrap";
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import googleSignInBtn from "../../images/icon/btn_google_signin_dark_pressed_web.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [agreed, setAgreed] = useState(false);
+  const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-  const handleSubmit = (e) => {
+  const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    createUserWithEmailAndPassword(email, password);
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: name });
+    navigate("/");
   };
   return (
     <div className="form-container">
