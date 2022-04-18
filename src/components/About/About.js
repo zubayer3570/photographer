@@ -1,15 +1,18 @@
 import React from "react";
+import me from "../../images/about/me.jpg";
+import "./About.css";
 
 const About = () => {
   return (
-    <div>
+    <div className="about">
       <h1 className="text-center">This is about Me!</h1>
-      <p>Name: Mahmudul Hasan Zubayer</p>
-      <p className="text-center">
+      <h2 className="text-center">Name: Mahmudul Hasan Zubayer</h2>
+      <img src={me} alt="" />
+      <h2 className="text-center">
         I am a student of hon's first year. I am in cse department. my goal from
         this course is to get an internship or a job. And my plan B is
         freelancing
-      </p>
+      </h2>
     </div>
   );
 };

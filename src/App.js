@@ -23,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/reset-password" element={<PasswordReset />}></Route>
+        {/* this is protected route */}
         <Route
           path="/checkout"
           element={

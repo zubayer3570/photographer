@@ -10,6 +10,7 @@ import auth from "../../firebase.init";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  // used email-password and google sign in
   const [agreed, setAgreed] = useState(false);
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -24,6 +25,7 @@ const Login = () => {
     await signInWithEmailAndPassword(email, password);
     if (error) {
       errorElement = <p className="text-danger">Error: {error.message}</p>;
+      console.log(error.message);
     }
     if (user) {
       navigate(from, { replace: true });
