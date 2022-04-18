@@ -12,16 +12,22 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
   const [agreed, setAgreed] = useState(false);
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
   const navigate = useNavigate();
+  let errorElement;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     await signInWithEmailAndPassword(email, password);
-    navigate(from, { replace: true });
+    if (error) {
+      errorElement = <p className="text-danger">Error: {error.message}</p>;
+    }
+    if (user) {
+      navigate(from, { replace: true });
+    }
   };
   const handleGoogleSignIn = async () => {
     await signInWithGoogle();
@@ -35,7 +41,6 @@ const Login = () => {
           <Form.Label>Email address</Form.Label>
           <Form.Control name="email" type="email" placeholder="Enter email" />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -48,9 +53,10 @@ const Login = () => {
           <Form.Check
             onClick={() => setAgreed(!agreed)}
             type="checkbox"
-            label="Check me out"
+            label="Accept Terms and Conditions"
           />
         </Form.Group>
+        {errorElement}
         <Button disabled={!agreed} variant="primary" type="submit">
           Login
         </Button>

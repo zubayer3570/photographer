@@ -9,6 +9,7 @@ const Service = (props) => {
     <div className="service">
       <img src={props.service.img} alt="" />
       <h3>{props.service.name}</h3>
+      <h4>{props.service.price}</h4>
       <p>{props.service.description}</p>
       <Button onClick={() => navigate("/checkout")} variant="primary">
         CheckOut
