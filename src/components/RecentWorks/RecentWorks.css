@@ -1,0 +1,8 @@
+.recent-works-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.sliders{
+    width: 600px;
+}
