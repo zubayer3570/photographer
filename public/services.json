@@ -1,0 +1,17 @@
+[
+    {"id": 1,
+    "name" : "Hire for News Channel",
+    "img" : "https://i.postimg.cc/YjT5ngvG/service-1.jpg",
+    "description" : "I have worked for various news channel"
+    },
+    {"id": 2,
+    "name" : "For Small Jobs",
+    "img" : "https://i.postimg.cc/SJ8wws9Z/service-2.jpg",
+    "description" : "I also do wild photography"
+    },
+    {"id": 3,
+    "name" : "Hire for Specific Jobs",
+    "img" : "https://i.postimg.cc/5XVZ1Vqf/service-3.jpg",
+    "description" : "I also work for covering specific events"
+    }
+]

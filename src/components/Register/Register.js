@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import {
   useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
@@ -12,9 +13,12 @@ import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   const [agreed, setAgreed] = useState(false);
   const navigate = useNavigate();
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-  const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
+  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(
+    auth,
+    { sendEmailVerification: true }
+  );
+  const [updateProfile] = useUpdateProfile(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -56,8 +60,15 @@ const Register = () => {
           Register
         </Button>
       </Form>
-      <img src={googleSignInBtn} alt="" />
-      <Link style={{ textDecoration: "none", display: "inline" }} to="/login">
+      <img onClick={() => signInWithGoogle()} src={googleSignInBtn} alt="" />
+      <Link
+        style={{
+          textDecoration: "none",
+          display: "inline",
+          marginBottom: "50px",
+        }}
+        to="/login"
+      >
         Already have an Account?
       </Link>
     </div>

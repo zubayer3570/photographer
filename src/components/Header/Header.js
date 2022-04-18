@@ -16,6 +16,11 @@ const Header = () => {
         <Navbar.Collapse className="navigations" id="responsive-navbar-nav">
           <Nav>
             <Nav.Link as={Link} to="/">
+              <p style={{ color: "white", margin: "0", padding: "0" }}>
+                {user?.displayName}
+              </p>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
             <Nav.Link as={Link} to="/blogs">
@@ -29,7 +34,7 @@ const Header = () => {
             </Nav.Link>
             {user ? (
               <Nav.Link as={Button} onClick={() => signOut(auth)}>
-                signout
+                <h6>Sign Out</h6>
               </Nav.Link>
             ) : (
               <Nav.Link as={Link} to="/login">
